@@ -26,7 +26,18 @@ def netflix_range_of_release(min_release_year, max_release_year):
     range_of_films = netflix_dao.range_of_release(min_release_year, max_release_year)
     return jsonify(range_of_films)
 
+# Создаем вьюшку с выводом фильмов по категории
+@api_netflix_blueprint.route('/rating/<category>')
+def get_movies_by_rating(category):
+    logger.debug(f"Запрошен вывод фильмов категории {category}")
+    movies_by_rating = netflix_dao.show_rating_list(category)
+    return jsonify(movies_by_rating)
 
 
-
+# Создаем вьюшку с выводом фильмов по заданному жанру
+@api_netflix_blueprint.route('/genre/<genre>')
+def get_movies_by_genre(genre):
+    logger.debug(f"Запрошен вывод фильмов жанра {genre}")
+    movies_by_genre = netflix_dao.show_listed_in(genre)
+    return jsonify(movies_by_genre)
 
